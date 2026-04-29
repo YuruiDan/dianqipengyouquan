@@ -5,6 +5,7 @@ import { useFeed } from '../context/FeedContext'
 import { getPostsByAuthor, getUserById } from '../data/selectors'
 import type { InteractionRecord } from '../types/models'
 import { getInitials } from '../utils/format'
+import { resolveAssetPath } from '../utils/resolveAssetPath'
 
 export default function PersonProfile() {
   const { id } = useParams()
@@ -34,14 +35,16 @@ export default function PersonProfile() {
     toggleInteraction(postId, currentUser?.id ?? null, action)
   }
 
+  const avatarSrc = resolveAssetPath(user.avatarImage)
+
   return (
     <div className="mx-auto w-full max-w-[980px] px-4 py-6 lg:px-6">
       <section className="panel mb-5 overflow-hidden p-0">
         <div className="bg-gradient-to-r from-indigo-900 via-ink-700 to-aurora-500 p-6 text-white">
           <div className="flex flex-wrap items-center gap-4">
-            {user.avatarImage ? (
+            {avatarSrc ? (
               <img
-                src={user.avatarImage}
+                src={avatarSrc}
                 alt={`${user.name} 头像`}
                 className="h-16 w-16 rounded-full object-cover ring-4 ring-white/30"
                 loading="lazy"
