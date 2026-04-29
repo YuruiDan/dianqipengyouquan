@@ -60,7 +60,7 @@ export default function PostCard({
           {authorAvatarSrc ? (
             <img
               src={authorAvatarSrc}
-              alt={`${author.name} 头像`}
+              alt={`${author?.name ?? post.authorName} 头像`}
               className="h-12 w-12 rounded-full object-cover"
               loading="lazy"
               decoding="async"
