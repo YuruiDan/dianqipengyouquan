@@ -7,6 +7,7 @@ import { useAuth } from '../context/AuthContext'
 import { useFeed } from '../context/FeedContext'
 import { getAllInventions, getAllPosts, getPostAuthor, getUniqueTags, searchPosts } from '../data/selectors'
 import type { InteractionRecord, Post } from '../types/models'
+import { resolveAssetPath } from '../utils/resolveAssetPath'
 
 export default function Home() {
   const [searchParams] = useSearchParams()
@@ -23,6 +24,7 @@ export default function Home() {
   const [activeTag, setActiveTag] = useState(allTag)
   const [showAllTags, setShowAllTags] = useState(false)
   const [notice, setNotice] = useState('')
+  const emblemSrc = resolveAssetPath('/tongji-emblem-circle.png')
   const timelineNotice = focusPostId
     ? focusEventId
       ? `已从时间轴节点 ${focusEventId} 定位到对应动态。`
@@ -83,7 +85,7 @@ export default function Home() {
           <div className="absolute bottom-8 right-8 top-8 hidden items-center justify-center md:flex">
             <div className="h-full animate-float rounded-full border border-white/20 bg-white/10 p-2 backdrop-blur-sm">
               <img
-                src="/tongji-emblem-circle.png"
+                src={emblemSrc}
                 alt="同济大学校徽"
                 className="h-full w-auto object-contain"
                 loading="eager"
