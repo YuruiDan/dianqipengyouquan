@@ -5,4 +5,11 @@ import react from '@vitejs/plugin-react'
 export default defineConfig({
   base: '/dianqipengyouquan/',
   plugins: [react()],
+  build: {
+    rollupOptions: {
+      input: {
+        index: 'index.source.html',
+      },
+    },
+  },
 })
