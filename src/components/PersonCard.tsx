@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import type { User } from '../types/models'
 import { getInitials } from '../utils/format'
+import { resolveAssetPath } from '../utils/resolveAssetPath'
 
 interface PersonCardProps {
   user: User
@@ -14,12 +15,14 @@ export default function PersonCard({ user, postsCount, highlighted = false, arti
     highlighted ? 'border-indigo-300 ring-2 ring-indigo-200 shadow-lg shadow-indigo-100/70' : ''
   }`
 
+  const avatarSrc = resolveAssetPath(user.avatarImage)
+
   return (
     <article id={articleId} className={cardClass}>
       <div className="mb-3 flex items-start gap-3">
-        {user.avatarImage ? (
+        {avatarSrc ? (
           <img
-            src={user.avatarImage}
+            src={avatarSrc}
             alt={`${user.name} 头像`}
             className="h-12 w-12 rounded-full object-cover"
             loading="lazy"
