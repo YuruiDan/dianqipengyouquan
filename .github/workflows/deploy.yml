@@ -33,6 +33,12 @@ jobs:
       - name: Build
         run: npm run build
 
+      - name: Ensure Pages entry file
+        run: |
+          if [ -f dist/index.source.html ]; then
+            cp dist/index.source.html dist/index.html
+          fi
+
       - name: Setup Pages
         uses: actions/configure-pages@v5
         with:
