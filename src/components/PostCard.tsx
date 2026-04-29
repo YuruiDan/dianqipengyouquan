@@ -2,6 +2,7 @@ import type { ReactNode } from 'react'
 import { Link } from 'react-router-dom'
 import type { InteractionRecord, Post, PostStats, User } from '../types/models'
 import { getInitials } from '../utils/format'
+import { resolveAssetPath } from '../utils/resolveAssetPath'
 
 const actionConfig: Array<{ key: keyof InteractionRecord; label: string }> = [
   { key: 'liked', label: '点赞' },
@@ -50,13 +51,15 @@ export default function PostCard({
       : 'elevate-on-hover'
   }`
 
+  const authorAvatarSrc = resolveAssetPath(author?.avatarImage)
+
   return (
     <article id={articleId} className={cardClass}>
       <div className="mb-4 flex items-start justify-between gap-3">
         <div className="flex items-start gap-3">
-          {author?.avatarImage ? (
+          {authorAvatarSrc ? (
             <img
-              src={author.avatarImage}
+              src={authorAvatarSrc}
               alt={`${author.name} 头像`}
               className="h-12 w-12 rounded-full object-cover"
               loading="lazy"
