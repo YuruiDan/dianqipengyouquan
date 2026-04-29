@@ -1,6 +1,7 @@
 import { Link, NavLink } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 import { getInitials } from '../utils/format'
+import { resolveAssetPath } from '../utils/resolveAssetPath'
 
 const navItems = [
   { to: '/', label: '首页' },
@@ -18,6 +19,7 @@ const defaultClass =
 
 export default function Navbar() {
   const { currentUser, logout } = useAuth()
+  const emblemSrc = resolveAssetPath('/tongji-emblem-circle.png')
 
   return (
     <header className="sticky top-0 z-40 border-b border-white/70 bg-white/78 shadow-[0_6px_30px_rgba(12,24,58,0.08)] backdrop-blur-xl">
@@ -30,7 +32,7 @@ export default function Navbar() {
             <div className="hidden text-xs text-indigo-600/90 sm:block">Inventors Circle Timeline</div>
           </div>
           <img
-            src="/tongji-emblem-circle.png"
+            src={emblemSrc}
             alt="同济大学校徽"
             className="h-8 w-8 rounded-full border border-indigo-100/80 bg-white/90 p-0.5 object-contain shadow-sm sm:h-10 sm:w-10 md:h-12 md:w-12"
             loading="eager"
